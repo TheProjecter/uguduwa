@@ -32,6 +32,7 @@ include 'regxs.php';
 include 'adds.php';
 include 'contentfilter.php';
 include 'blockedips.php';
+include 'host.php';
 
 set_time_limit(120);
 
