@@ -269,6 +269,11 @@ function urlencodecookievalues($value){
 	return $value;
 }
 
+
+/*
+ * Change evals into pevals.
+ * the peval function will be furnished via encrypter_js.php
+ */
 function grokChangeEval($output){
 	return "peval(";		
 }

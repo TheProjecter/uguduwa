@@ -1,4 +1,0 @@
-
-RewriteEngine on
-RewriteRule ^proxy(?!\.php)(.*) proxy.php$1
-RewriteRule (.*)image([^\.].*) $1image.php$2
