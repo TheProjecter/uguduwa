@@ -1,0 +1,23 @@
+Project Uguduwa - Web Proxy
+Copyright 2010 righteous.ninja
+ireshagun@gmail.com
+
+This product includes software developed 
+by Iresha Gunathileke 
+(http://code.google.com/p/were-proxy/).
+
+This product is built on top of  an open 
+source IP:Port emulating php proxy called 
+project Mugatiya 
+(http://mugatiya.wordpress.com/)
+
+Files from projct Mugatiya have been modified
+as required and some files have been deleted.
+
+It requires an php capable web/application
+server.
+
+This author is not affiliated in any way with
+the author of Project Mugatiya.
+
+This author does not condone spamming. 
