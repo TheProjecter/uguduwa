@@ -21,12 +21,12 @@
  * Replace quoted urls inside javascript
  */
 function grokScriptReplace($matches){
-	global $myproxy, $myurlnameEnc, $myurldelimiter, $sub_req_url;
+	global $myproxy, $sub_req_url;
 
 	return	grokReplace($matches[0], $matches[2]);
 }
 function grokScriptSrcReplace($matches){
-	global $myproxy, $myurlnameEnc, $myurldelimiter, $sub_req_url;
+	global $myproxy,  $sub_req_url;
 
 	return	grokReplace($matches[0], $matches[3]);
 }
@@ -36,7 +36,7 @@ function grokScriptSrcReplace($matches){
  * Replace all leftover http* requests.
  */
 function grokHttpReplace($matches){
-	global $myproxy, $myurlnameEnc, $myurldelimiter, $sub_req_url;
+	global $myproxy, $sub_req_url;
 	
 	return grokReplace($matches[0], $matches[1]);
 }
@@ -46,7 +46,7 @@ function grokHttpReplace($matches){
  * Replace src/href/action inside html tags 
  */
 function grokSrcReplace($matches){
-	global $myproxy, $myurlnameEnc, $sub_req_url;
+	global $myproxy, $sub_req_url;
 
 	$tmp;
 	$origstring=$matches[0];
@@ -58,7 +58,7 @@ function grokSrcReplace($matches){
 		if(strcasecmp($matches[1], "action")==0 && 
 		!preg_match("/method\s*=\s*([\"'])post\\1/ims",$origstring)){
 			$tmp=str_replace($matches[3], $myproxy, $origstring);
-			$tmp.="<input type=\"hidden\" name=\"$myurlnameEnc\" value=\"F".grokReplace("",$matches[3],1)."\"/>";
+			$tmp.="<input type=\"hidden\" name=\"".URLNAMEENC."\" value=\"F".grokReplace("",$matches[3],1)."\"/>";
 		}
 		else{
 			$tmp=grokReplace($origstring, $matches[3]);
@@ -86,7 +86,7 @@ function grokUrlReplace($matches){
  * Encode a url, adding hostname or current directory where applicable
  */
 function grokReplace($origstring, $match, $retval=0){
- 	global $myhost, $myproxy, $loglevel, $regxf, $myurlnameEnc, $currentHost, $currentDirectory;
+ 	global $myhost, $myproxy, $loglevel, $regxf, $currentHost, $currentDirectory;
 
  	if(stripos($match,$myhost)===0)
 		return $origstring;
@@ -111,7 +111,7 @@ function grokReplace($origstring, $match, $retval=0){
 	if($retval)
 		return $url;
 	else
-  		 return str_replace( $oldmatch, "$myproxy?$myurlnameEnc=$url", $origstring);
+  		 return str_replace( $oldmatch, "$myproxy?".URLNAMEENC."=$url", $origstring);
   	
 }
 
@@ -291,8 +291,8 @@ function grokReverseHTTPS($url){
 
 /* I don't think we really need this
 function  grokFlashvarsReplace($matches){
-	global $mybypassproxy, $myurlnameEnc;
-	$fileurl="$myproxy?$myurlnameEnc=".grokReplace($matches[0], urldecode($matches[1]),1);
+	global $mybypassproxy;
+	$fileurl="$myproxy?".URLNAMEENC."=".grokReplace($matches[0], urldecode($matches[1]),1);
 	return str_replace($matches[1], urlencode($fileurl), $matches[0]);
 }
 */

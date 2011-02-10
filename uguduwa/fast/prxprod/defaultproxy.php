@@ -51,6 +51,8 @@ include 'offloader.php';
 include 'defaultopts.php';
 include 'constants.php';
 include 'blockedips.php';
+error_reporting(E_ERROR); 
+ini_set('display_errors', '1');
 
 $dataarray = array();
 
@@ -75,7 +77,6 @@ $binarydata=0;
 /* POST request */
 $encoded="";
 
-
 /*
  * test the guard cookie to make avoid phishing accusations.
  */
@@ -85,29 +86,29 @@ $securityok=testguardcookie($_SERVER['HTTP_COOKIE'], $_SERVER['REMOTE_ADDR']);
 /*
  * Decode the URL
  */
-if(isset($_GET[$myurlnameEnc])){
+if(isset($_GET[URLNAMEENC])){
 	if(!$securityok){
-		header(makeAllHTTPS("Location: $mysecurityhtml/html_security.php?$myurlnameEnc=".$_GET[$myurlnameEnc]));
+		header(makeAllHTTPS("Location: $mysecurityhtml/html_security.php?".URLNAMEENC."=".$_GET[URLNAMEENC]));
 		exit(0);	
 	}
-	$original_req_url=$_GET[$myurlnameEnc];
-	$sub_req_url=buildGetRequest("$myproxy?".$_SERVER['QUERY_STRING']);
+	$original_req_url=$_GET[URLNAMEENC];
+	$sub_req_url=buildGetRequest("$myproxy?".$_SERVER['QUERY_STRING'],0);
 }
-else if(isset($_GET[$myurlnameJSEnc])){
+else if(isset($_GET[URLNAMEJSENC])){
 	if(!$securityok){
 		header(makeAllHTTPS("Location: $mysecurityhtml/html_security.php?".$_SERVER["QUERY_STRING"]));
 		exit(0);	
 	}
-	$original_req_url=xdecodecx($_GET[$myurlnameJSEnc]);
+	$original_req_url=xdecodecx($_GET[URLNAMEJSENC]);
 	$sub_req_url=$original_req_url;
 	makeDataarray($_GET, $dataarray);	
 }
-else if(isset($_GET[$myurlnamePlain])){
+else if(isset($_GET[URLNAMEPLAIN])){
 	if(!$securityok){
 		header(makeAllHTTPS("Location: $mysecurityhtml/html_security.php?".$_SERVER["QUERY_STRING"]));
 		exit(0);	
 	}
-	$original_req_url=$_GET[$myurlnamePlain];
+	$original_req_url=$_GET[URLNAMEPLAIN];
 	$sub_req_url=$original_req_url;
 	makeDataarray($_GET, $dataarray);
 }
@@ -127,6 +128,7 @@ else{
 
 }
 
+
 if(!isset($sub_req_url) || $sub_req_url == ""){
 	header(makeAllHTTPS("Location: $myerrorpage?e=2"));
 	exit(0);	
@@ -134,7 +136,7 @@ if(!isset($sub_req_url) || $sub_req_url == ""){
 else{
 	$newhost=getRedirectProxy($sub_req_url);
 	if($newhost!=NULL){
-		header(makeAllHTTPS("Location: $newhost?$myurlnameEnc=".fullyencode($sub_req_url)));
+		header(makeAllHTTPS("Location: $newhost?".URLNAMEENC."=".fullyencode($sub_req_url)));
 		exit(0);
 	}
 	$sub_req_url = str_replace(" ", "%20", $sub_req_url);
@@ -176,7 +178,6 @@ if(strstr($_SERVER['REQUEST_METHOD'], "POST")){
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS,  $encoded);
 }
-
 
 /*
  * EXECUTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

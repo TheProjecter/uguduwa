@@ -21,17 +21,18 @@
 /*
  * Primary tags for proxy
  */
-$myurlnameEnc="urlE";
-$myurlnamePlain="urlP";
-$myurlnameJSEnc="urlX";
-$mytrueurlnamePlain="urlT";
+define('URLNAMEENC', "urlE");
+define('URLNAMEPLAIN', "urlP");
+define('URLNAMEJSENC', "urlX");
+define('TRUEURLNAMEPLAIN', "urlT");
+
 
 
 /*
  * Tags to maintain external sites
  */
-$myaddurlTag="urlA";
-$bgcolorTag="col";
-$sanitizeTag="san";
+define('MYADDURLTAG', "urlA");
+define('MYBGCOLORTAG', "col");
+define('SANITIZETAG', "san");
 
 ?>

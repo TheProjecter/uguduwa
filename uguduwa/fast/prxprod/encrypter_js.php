@@ -18,7 +18,7 @@ function peval(x){
 	echo $myoriginalproxy;
 	?>";
 	
-	var temp2="<?php echo $myurlnamePlain?>";
+	var temp2="<?php echo URLNAMEPLAIN?>";
 	
 	regx = /http:\/\/[^'\"\s]*/gi;
 	urls = x.match(regx);
