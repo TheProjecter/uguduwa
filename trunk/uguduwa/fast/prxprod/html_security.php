@@ -47,10 +47,10 @@ if(isset($_GET[$myurlnameEnc])){
 	<a href="http://www.google.com">Get me out of here</a>
 <?php 	
 }
-else if(isset($_GET[$myurlnameJSEnc])){
+else if(isset($_GET[URLNAMEJSENC])){
 ?>	
 
-You are about to surf to <b><script>document.write(xdecodecx('<?php echo $_GET[$myurlnameJSEnc]; ?>'));</script></b> via the Code Diaries Proxy.
+You are about to surf to <b><script>document.write(xdecodecx('<?php echo $_GET[URLNAMEJSENC]; ?>'));</script></b> via the Code Diaries Proxy.
 	<p>&nbsp;</p>
 	
 	<a href="<?php echo "$mysecurityhtml/html_exit.php"; ?>"><font style="font-weight:bold;color:red">Get me out of here</font></a><br/>
@@ -66,10 +66,10 @@ You are about to surf to <b><script>document.write(xdecodecx('<?php echo $_GET[$
 
 <?php 	
 }
-else if(isset($_GET[$myurlnamePlain])){
+else if(isset($_GET[URLNAMEPLAIN])){
 ?>	
 
-You are about to surf to <b><?php echo $_GET[$myurlnamePlain]; ?></b> via the Code Diaries Proxy.
+You are about to surf to <b><?php echo $_GET[URLNAMEPLAIN]; ?></b> via the Code Diaries Proxy.
 	<p>&nbsp;</p>
 	
 	<a href="<?php echo"$mysecurityhtml/html_exit.php"; ?>"><font style="font-weight:bold;color:red">Get me out of here</font></a><br/>

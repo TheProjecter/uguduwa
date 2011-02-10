@@ -23,7 +23,6 @@
  * $myhost
  */
 $myoffloadarray= array(	"facebook.com"=>$_facebook,
-						"youtube.com"=>$_youtube,
 						"google.com"=>$_google);
 
 

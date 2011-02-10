@@ -55,11 +55,14 @@ function setdefaultoptions(&$ch, $_SERVER, $sub_req_url){
 	/*binary blaster*/
 	curl_setopt($ch, CURLOPT_WRITEFUNCTION, "writefunction");
 	
-	
 	if(stripos($sub_req_url, "127.0.0.1")===FALSE){
-		curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_BASIC);
-		curl_setopt($ch, CURLOPT_PROXY, "127.0.0.1:8080");
-		curl_setopt($ch, CURLOPT_PROXYUSERPWD, "username:password");
+		if(defined("USEPROXY")){
+			curl_setopt($ch, CURLOPT_PROXY,USEPROXY);
+			if(defined("USEPROXYCREDS")){
+				curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_BASIC);
+				curl_setopt($ch, CURLOPT_PROXYUSERPWD, USEPROXYCREDS);
+			}
+		}	
 	}
 }
 ?>

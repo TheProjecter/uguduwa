@@ -25,14 +25,13 @@ include 'contentfilter.php';
  * Adds the top banner on proxified pages. 
  */
 function addHeadMaster($output, $sub_req_url, &$rating){
-	global $percentintadds,  $myhost, 
-	$bgcolorTag, $dataarray, $myurlnamePlain, $myurlnameJSEnc,
-	$mystylesheet, $myjsencrypter, $myaddurlTag, $sanitizeTag, $myoriginalproxy;
+	global $percentintadds,  $myhost, $dataarray,
+	$mystylesheet, $myjsencrypter, $myoriginalproxy;
 	
 	/*extract the user values from the url*/
-	$bgcolor=$dataarray[$bgcolorTag];
-	$addurl=$dataarray[$myaddurlTag];
-	$sanitize=$dataarray[$sanitizeTag];
+	$bgcolor=$dataarray[MYBGCOLORTAG];
+	$addurl=$dataarray[MYADDURLTAG];
+	$sanitize=$dataarray[SANITIZETAG];
 	
 	
 	if(isset($sanitize))
@@ -103,18 +102,18 @@ function addHeadMaster($output, $sub_req_url, &$rating){
 	$head  =	"<div id=\"add_place_dvx\" style=\"height:".$totaldivheight."px;overflow:hidden\"></div>".
 			"<div scrolling=\"no\" style=\"margin:0 0 0 0;z-index:1000;overflow:hidden;position:absolute;top:0px;left:0px;width:100%;\" id=\"add_link_dvx\"></div>".
 			"<script>".
-			"function xsubmitx(){document.getElementById('$myurlnameJSEnc').value=xencodecx(document.getElementById('xu').value);}".
+			"function xsubmitx(){document.getElementById('".URLNAMEJSENC."').value=xencodecx(document.getElementById('xu').value);}".
 			"if(top.location==self.location){".
 			"var x=document.getElementById('add_link_dvx');x.style.height=\"".$totaldivheight."px\";x.visibility=\"visible\";".
 			"x.innerHTML=\"<table class=\\\"prxtbl\\\" style=\\\"$colorstring\\\">".
 			"<tr><td><table class=\\\"prxtbl\\\" style=\\\"$colorstring\\\"><tr><td width=\\\"1%\\\"><span class=\\\"prxflnk\\\" id=\\\"add_show_dvx\\\"></span></td><td width=\\\"1%\\\"><form onsubmit=\\\"xsubmitx()\\\" target=\\\"_top\\\" class=\\\"prxf\\\" target=\\\"_top\\\" action=\\\"".$myoriginalproxy."\\\"><table style=\\\"$colorstring\\\" class=\\\"prxtbl\\\"><tr><td><b>Enter url</b></td><td>".
-/*pln*/		//"<input type=\\\"text\\\" value=\\\"$sub_req_url\\\" id=\\\"$myurlnamePlain\\\" class=\\\"prxfinbox\\\" size=\\\"75\\\"/>".
+/*pln*/		//"<input type=\\\"text\\\" value=\\\"$sub_req_url\\\" id=\\\"".URLNAMEPLAIN"."\\\" class=\\\"prxfinbox\\\" size=\\\"75\\\"/>".
 			"<input type=\\\"text\\\" value=\\\"$displayurl\\\" id=\\\"xu\\\" class=\\\"prxfinbox\\\" size=\\\"75\\\"/>".
-			"<input type=\\\"hidden\\\" value=\\\"$sub_req_url\\\" id=\\\"$myurlnameJSEnc\\\" name=\\\"$myurlnameJSEnc\\\"/>".
+			"<input type=\\\"hidden\\\" value=\\\"$sub_req_url\\\" id=\\\"".URLNAMEJSENC."\\\" name=\\\"".URLNAMEJSENC."\\\"/>".
 		
-			($external?"<input type=\\\"hidden\\\" name=\\\"$myaddurlTag\\\" value=\\\"".$addurl."\\\"/>":"").
-		 	($bgcolor?"<input type=\\\"hidden\\\" name=\\\"$bgcolorTag\\\" value=\\\"".$bgcolor."\\\"/>":"").
-/*san*/		//"</td><td><input title=\\\"Tick this to remove 'bad words' and sanitize websites. You may need this to bypass internet filters such as NetNanny etc, or filters that use deep packet inspection. May cause web page rendering problems\\\" type=\\\"checkbox\\\" class=\\\"prxfinbut\\\" name=\\\"$sanitizeTag\\\" value=\\\"1\\\" ".($sanitize?"CHECKED":"")." />".
+			($external?"<input type=\\\"hidden\\\" name=\\\"".MYADDURLTAG."\\\" value=\\\"".$addurl."\\\"/>":"").
+		 	($bgcolor?"<input type=\\\"hidden\\\" name=\\\"".MYBGCOLORTAG."\\\" value=\\\"".$bgcolor."\\\"/>":"").
+/*san*/		//"</td><td><input title=\\\"Tick this to remove 'bad words' and sanitize websites. You may need this to bypass internet filters such as NetNanny etc, or filters that use deep packet inspection. May cause web page rendering problems\\\" type=\\\"checkbox\\\" class=\\\"prxfinbut\\\" name=\\\"".SANITIZETAG."\\\" value=\\\"1\\\" ".($sanitize?"CHECKED":"")." />".
 		
 			"</td><td><input type=\\\"submit\\\" class=\\\"prxfinbut\\\" value=\\\"submit\\\"/></td></tr></table></form></td><td width=\\\"1%\\\">&nbsp;&nbsp; $ratingicon  </td><td width=\\\"1%\\\">&nbsp;&nbsp; $httpsicon  </td><td width=\\\"*\\\">&nbsp;</td><td width=\\\"1%\\\"><span class=\\\"prxflnk\\\" id=\\\"add_hide_dvx\\\"><a class=\\\"prxflnk\\\" href=\\\"javascript:hidemeplease()\\\">Hide!</a></span></td><td width=\\\"%1\\\">".($external?"&nbsp;&nbsp;&nbsp;":"<img style=\\\"text-align:right;border:0\\\" src=\\\"$myhost/prxprod/menu/ico_prxycore.gif\\\"/>")."</td></tr></table></td></tr>".
 /*add*/		"<tr><td><iframe id=\\\"add_link_ifrmx\\\" frameborder=\\\"0\\\" scrolling=\\\"no\\\" class=\\\"prxifrm\\\" src=\\\"$adpage\\\"></iframe></td></tr></table>\";".

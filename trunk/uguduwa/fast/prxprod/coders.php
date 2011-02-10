@@ -21,9 +21,9 @@
 /*
  * The main constants used in coders.php
  */
-$myurldelimiter="198701";
-$myinfodelimiter="||";
-$mycodeword="Xu3L1n6";
+define('URLDELIMITER',"198701");
+define('INFODELIMITER',"||");
+define('CODEWORD',"Xu3L1n6");
 
 
 /*
@@ -31,9 +31,9 @@ $mycodeword="Xu3L1n6";
  */
 $safeBase64chars = array("/"=>'-', "="=>'_', "+"=>'.');    
 function safeBase64_encode($str){
-  global  $safeBase64chars, $mycodeword;
+  global  $safeBase64chars;
 
-  $str = xencrypt($str, $mycodeword);
+  $str = xencrypt($str, CODEWORD);
   $str = base64_encode($str);
   foreach($safeBase64chars as $from=>$to){
     $str = str_replace($from, $to, $str); 
@@ -41,12 +41,12 @@ function safeBase64_encode($str){
   return $str;
 }
 function safeBase64_decode($str){
-  global  $safeBase64chars, $mycodeword;
+  global  $safeBase64chars ;
   foreach($safeBase64chars as $from=>$to){
     $str = str_replace($to, $from, $str); 
   }
   //return base64_decode($str);
-  return xdecrypt(base64_decode($str), $mycodeword);
+  return xdecrypt(base64_decode($str), CODEWORD);
 }
 
 
@@ -54,8 +54,8 @@ function safeBase64_decode($str){
  * Fully encode an URL including the delimiter
  */
 function fullyencode($url){
-	global $dataarray, $myurlnameEnc, $myurldelimiter, $myinfodelimiter;
-	return safeBase64_encode($url.rawencode($dataarray)).$myurldelimiter;
+	global $dataarray;
+	return safeBase64_encode($url.rawencode($dataarray)).URLDELIMITER;
 	
 }
 
@@ -64,15 +64,13 @@ function fullyencode($url){
  * Raw encode and raw decode URLs with the additional information
  */
 function rawencode($data){
-	global $myinfodelimiter;
 	$tmp="";
 	foreach( $data as $keys=>$values)
-		$tmp.="$myinfodelimiter$keys=$values";	
+		$tmp.=INFODELIMITER."$keys=$values";	
 	return $tmp;	
 }
 function rawdecode($dataarray, $datastring){
-	global $myinfodelimiter;
-	$tmpa = explode($myinfodelimiter, $datastring);
+	$tmpa = explode(INFODELIMITER, $datastring);
 	foreach($tmpa as $value){
  		preg_match("/(.*)=(.*)/ims", $value, $matches);
  		$dataarray["$matches[1]"]="$matches[2]";
@@ -100,20 +98,20 @@ function replaceFunnyChars($url){
 /*
  * Decode the GET url - Calls itself recursively untill all the URLs are decoded
  */
-function buildGetRequest($uri){
-	global $myurlnameEnc,  $myproxy, $myurldelimiter, $myinfodelimiter, $dataarray;
+function buildGetRequest($uri, $level){
+	global $myproxy, $dataarray;
 	
 	$uri=urldecode($uri);
 	
 	$xp = str_replace("/", "\/", $myproxy);
-	if(preg_match("/(.*?)(($xp\?)?)$myurlnameEnc=(F?)(.*?)$myurldelimiter(.*)/ms", $uri, $matches)){
+	if(preg_match("/(.*?)(($xp\?)?)".URLNAMEENC."=(F?)(.*?)".URLDELIMITER."(.*)/ms", $uri, $matches)){
 		
 		$body=safeBase64_decode($matches[5]);
 		$url="";
 		
-		if(($p1=strpos($body, $myinfodelimiter))>1){
+		if(($p1=strpos($body, INFODELIMITER))>1){
 			$url = substr($body, 0, $p1);
-			$body = substr($body, $p1+strlen($myinfodelimiter));
+			$body = substr($body, $p1+strlen(INFODELIMITER));
 			$dataarray=rawdecode($dataarray, $body);
 		}
 		else
@@ -128,12 +126,13 @@ function buildGetRequest($uri){
 		}
 		
 		//echo "e:$url\n";
-		return buildGetRequest($url);
+		return buildGetRequest($url, ++$level);
 	}
 	else{
-		//echo "exiting\n $url";
-		//exit(0);
-		return replaceFunnyChars($uri);	
+		if($level==0)
+			return "";
+		else	
+			return replaceFunnyChars($uri);	
 	}
 	
 }
@@ -152,13 +151,13 @@ function encodeBaseTag($host){
  * Decode the <BASE> appended request 
  */
 function decodebaseRequest($url){
-	global $myproxy, $myurldelimiter, $myinfodelimiter, $dataarray;
+	global $myproxy, $dataarray;
 	//$url=str_replace("%5C", "\\", $url);
-	if(preg_match("/([^\/]*)$myurldelimiter(\/.*)/ims", $url, $matches)!=0){
+	if(preg_match("/([^\/]*)".URLDELIMITER."(\/.*)/ims", $url, $matches)!=0){
 		$body=safeBase64_decode($matches[1]);
-		if(($p1=strpos($body, $myinfodelimiter))>1){
+		if(($p1=strpos($body, INFODELIMITER))>1){
 			$url = substr($body, 0, $p1);
-			$body = substr($body, $p1+strlen($myinfodelimiter));
+			$body = substr($body, $p1+strlen(INFODELIMITER));
 			$dataarray=rawdecode($dataarray, $body);
 		}
 		else
@@ -203,14 +202,14 @@ function xdecrypt($string, $key) {
  * Create the dataarray from the get Parameters.
  */
 function makeDataarray($get,&$dataarray){
-	global $myurlnameEnc, $myurlnamePlain, $myurlnameJSEnc, $mytrueurlnamePlain;
+
 
 	$dataarray = $get;
 	
-	if(isset($dataarray[$myurlnameEnc])) unset($dataarray[$myurlnameEnc]);
-	if(isset($dataarray[$myurlnamePlain])) unset($dataarray[$myurlnamePlain]);
-	if(isset($dataarray[$myurlnameJSEnc])) unset($dataarray[$myurlnameJSEnc]);
-	if(isset($dataarray[$mytrueurlnamePlain])) unset($dataarray[$mytrueurlnamePlain]);
+	if(isset($dataarray[URLNAMEENC])) unset($dataarray[URLNAMEENC]);
+	if(isset($dataarray[URLNAMEPLAIN])) unset($dataarray[URLNAMEPLAIN]);
+	if(isset($dataarray[URLNAMEJSENC])) unset($dataarray[URLNAMEJSENC]);
+	if(isset($dataarray[TRUEURLNAMEPLAIN])) unset($dataarray[TRUEURLNAMEPLAIN]);
 }
 
 

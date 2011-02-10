@@ -30,8 +30,6 @@ $myoriginalproxy	= "$myhost/prxprod/proxy";
  * The offload proxies
  */
 $_facebook		= "$myhost/facebookprod/proxy";
-$_youtube		= "$myhost/youtubeprod/proxy";
-$_twitter		= "$myhost/twitterprod/proxy";
 $_google		= "$myhost/googleprod/proxy";
 $_bypassproxy	= "$myhost/bypassprod/proxy";
 
@@ -55,5 +53,12 @@ $loglevel=0;
  */
 define('STREAMLINE', false);
 
+
+/*
+ * Define the proxy details if you are using a proxy and if
+ * the proxy requires username/password
+ */
+//define('USEPROXY', 	  "mytestproxy.com:3128");
+//define('USEPROXYCREDS', "Barbie:IloveKen");
 
 ?>
