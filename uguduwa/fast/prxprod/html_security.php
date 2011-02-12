@@ -40,7 +40,7 @@ include "grokkers.php";
 <center>
 
 <?php
-if(isset($_GET[$myurlnameEnc])){
+if(isset($_GET[URLNAMEENC])){
 ?>
 	It looks like you have come here through a link somebody sent you.
 	<p>&nbsp;</p>
