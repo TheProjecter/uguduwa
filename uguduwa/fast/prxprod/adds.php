@@ -21,13 +21,14 @@
 /*
  * Specify all the adds here. 
  */
-$internaladdpage 	= "http://127.0.0.1/php/fast/prxprod/ads/page1.html";
-$addpageG 			= "http://127.0.0.1/php/fast/prxprod/ads/pageG1.html";
-$addpageM 			= "http://127.0.0.1/php/fast/prxprod/ads/pageM1.html";
-$addpageR 			= "http://127.0.0.1/php/fast/prxprod/ads/pageR1.html";
-$addpageU 			= "http://127.0.0.1/php/fast/prxprod/ads/pageU1.html";
-$externaladdpageG 	= "http://127.0.0.1/php/fast/prxprod/ads/pagexG1.html";
-$externaladdpageM 	= "http://127.0.0.1/php/fast/prxprod/ads/pagexM1.html";
+//$addprefix			= "http://127.0.0.1/php/fast/prxprod";
+$addprefix			= "http://127.0.0.1/php/codeproxy";
+$addpageG 			= "$addprefix/ads/pageG1.html";
+$addpageM 			= "$addprefix/ads/pageM1.html";
+$addpageR 			= "$addprefix/ads/pageR1.html";
+$addpageU 			= "$addprefix/ads/pageU1.html";
+$externaladdpageG 	= "$addprefix/ads/pagexG1.html";
+$externaladdpageM 	= "$addprefix/ads/pagexM1.html";
 
 
 /*
