@@ -1,4 +1,0 @@
-Options -Multiviews
-RewriteEngine On
-
-RewriteRule ^proxy(?!\.php)(.*) proxy.php$1
