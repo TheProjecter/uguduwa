@@ -14,29 +14,22 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 	
-	Project Uguduwa: uguduwa.wordpress.com
+	Project Uguduwa: http://www.tidytutorials.com/p/uguduwa.html
  */	
 
 
 /*
- * These are included in the defaultproxy.php file
- * $myhost
- */
-$myoffloadarray= array(	"facebook.com"=>$_facebook,
-						"google.com"=>$_google);
-
-
-/*
- * Gets a proxy depending on the page. If it's facebook then use facebook proxy, 
- * youtube then youtube proxy etc.
- */
-function getRedirectProxy($url){
-	global $myoffloadarray, $myproxy;
-	foreach ($myoffloadarray as $key=>$value){
-		if(stripos($url, $key)!==false && stripos($myproxy, $value)===false){
-			return $value;
-		}
-	}
-	return NULL;
-}
+ * Blocked Sites.
+ * These sites will be blocked!!! Eff U Google
+ */			
+$blockedurls =array(
+	"doubleclick.net",
+	"googlesyndication.com",
+	"yieldmanager.com",
+	"ypn-js.overture.com",
+	"reachjunction.com",
+	"quantserve.com",
+	"reduxmedia.com",
+	"adbrite.com"
+	);			
 ?>

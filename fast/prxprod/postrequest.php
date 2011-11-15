@@ -14,7 +14,7 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 	
-	Project Uguduwa: uguduwa.wordpress.com
+	Project Uguduwa: http://www.tidytutorials.com/p/uguduwa.html
  */	
 
 

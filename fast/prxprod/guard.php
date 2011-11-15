@@ -14,25 +14,30 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 	
-	Project Uguduwa: uguduwa.wordpress.com
+	Project Uguduwa: http://www.tidytutorials.com/p/uguduwa.html
  */	
 
 
+$security_cookie="uc_xls9861.009";
 /*
- * Primary tags for proxy
+ * Functions to create a gaurd cookie and then test a guard cookie.
+ * This is requires to stop phishing attacks on your proxy.
  */
-define('URLNAMEENC', "urlE");
-define('URLNAMEPLAIN', "urlP");
-define('URLNAMEJSENC', "urlX");
-define('TRUEURLNAMEPLAIN', "urlT");
+function getguardcookie($sourceip){
+	return safeBase64_encode($sourceip);	
+}
 
+function testguardcookie($cookiestring, $sourceip){
+	global $security_cookie;
 
+	if(preg_match("/".$security_cookie."=([^;]*)/is", $_SERVER['HTTP_COOKIE'], $matches)){
+		$ip=safeBase64_decode($matches[1]);	
+		if($ip===$sourceip)
+			return 1;
+		else
+			return 0;	
+	}
+}
 
-/*
- * Tags to maintain external sites
- */
-define('MYADDURLTAG', "urlA");
-define('MYBGCOLORTAG', "col");
-define('SANITIZETAG', "san");
 
 ?>
