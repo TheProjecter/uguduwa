@@ -18,7 +18,7 @@
  */	
 
 
-$myhost				= "http://127.0.0.1/php/fast";
+$myhost				= "http://127.0.0.1/fast";
 
 $mysecurityhtml		= "$myhost/prxprod";
 

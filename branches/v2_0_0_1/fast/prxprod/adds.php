@@ -21,8 +21,7 @@
 /*
  * Specify all the adds here. 
  */
-//$addprefix			= "http://127.0.0.1/php/fast/prxprod";
-$addprefix			= "http://127.0.0.1/php/codeproxy";
+$addprefix			= "http://127.0.0.1/fast/prxprod";
 $addpageG 			= "$addprefix/ads/pageG1.html";
 $addpageM 			= "$addprefix/ads/pageM1.html";
 $addpageR 			= "$addprefix/ads/pageR1.html";

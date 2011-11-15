@@ -76,7 +76,7 @@ function addHeadMaster($output, $sub_req_url, &$rating){
 	else{
 		$bgcolor	= "";
 		$external	= 0;
-		$divheight	= 92;
+		$divheight	= 62;
 
 		$adpage=getMyAdd($rating);
 	}
@@ -91,7 +91,7 @@ function addHeadMaster($output, $sub_req_url, &$rating){
 	else
 		$ratingicon="<font class=\\\"prxftxt\\\" style=\\\"background-color:black\\\">&nbsp;U&nbsp;</font>";
 
-	$hideheight	= 27;
+	$hideheight	= 25;
 	$hidewidth = 50;
 	$totaldivheight=($divheight+40);
 
@@ -115,7 +115,7 @@ function addHeadMaster($output, $sub_req_url, &$rating){
 		 	($bgcolor?"<input type=\\\"hidden\\\" name=\\\"".MYBGCOLORTAG."\\\" value=\\\"".$bgcolor."\\\"/>":"").
 /*san*/		//"</td><td><input title=\\\"Tick this to remove 'bad words' and sanitize websites. You may need this to bypass internet filters such as NetNanny etc, or filters that use deep packet inspection. May cause web page rendering problems\\\" type=\\\"checkbox\\\" class=\\\"prxfinbut\\\" name=\\\"".SANITIZETAG."\\\" value=\\\"1\\\" ".($sanitize?"CHECKED":"")." />".
 		
-			"</td><td><input type=\\\"submit\\\" class=\\\"prxfinbut\\\" value=\\\"submit\\\"/></td></tr></table></form></td><td width=\\\"1%\\\">&nbsp;&nbsp; $ratingicon  </td><td width=\\\"1%\\\">&nbsp;&nbsp; $httpsicon  </td><td width=\\\"*\\\">&nbsp;</td><td width=\\\"1%\\\"><span class=\\\"prxflnk\\\" id=\\\"add_hide_dvx\\\"><a class=\\\"prxflnk\\\" href=\\\"javascript:hidemeplease()\\\">Hide!</a></span></td><td width=\\\"%1\\\">".($external?"&nbsp;&nbsp;&nbsp;":"<img style=\\\"text-align:right;border:0\\\" src=\\\"$myhost/prxprod/menu/ico_prxycore.gif\\\"/>")."</td></tr></table></td></tr>".
+			"</td><td><input type=\\\"submit\\\" class=\\\"prxfinbut\\\" value=\\\"submit\\\"/></td></tr></table></form></td><td width=\\\"1%\\\">&nbsp;&nbsp; $ratingicon  </td><td width=\\\"1%\\\">&nbsp;&nbsp; $httpsicon  </td><td width=\\\"*\\\">&nbsp;</td><td width=\\\"1%\\\"><span class=\\\"prxflnk\\\" id=\\\"add_hide_dvx\\\"><a class=\\\"prxflnk\\\" href=\\\"javascript:hidemeplease()\\\">Hide!</a></span></td><td width=\\\"%1\\\"></td></tr></table></td></tr>".
 /*add*/		"<tr><td><iframe id=\\\"add_link_ifrmx\\\" frameborder=\\\"0\\\" scrolling=\\\"no\\\" class=\\\"prxifrm\\\" src=\\\"$adpage\\\"></iframe></td></tr></table>\";".
 			"document.getElementById('add_link_ifrmx').style.height=\"".$divheight."px\";".
 			"}else{;".
