@@ -43,7 +43,7 @@ error_reporting(0);
 include 'coders.php';
 include 'guard.php';
 include 'grokkers.php';
-include 'regxs.php';
+//include 'regxs.php';
 include 'headmaster.php';
 include 'adds.php';
 include 'postrequest.php';
