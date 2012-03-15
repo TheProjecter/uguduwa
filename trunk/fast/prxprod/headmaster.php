@@ -69,7 +69,7 @@ function addHeadMaster($output, $sub_req_url, &$rating){
 		$randomn= rand(1,10);
 		
 		if($randomn > $percentintadds && !preg_match("/page[GMRUx]([GM])*\d\.html/ims",$addurl) )
-			$adpage= getMyAdd($rating);
+			$adpage= $addurl;
 		else
 			$adpage=getMyExternalAdd($rating).($bgcolor==""?"":"?col=$addbgcolor");
 	}
