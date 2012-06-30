@@ -46,4 +46,11 @@ function recursiveposter($array, $prepend, &$finalstring){
 		}
 	}
 }
+function checkpostforspam($post){
+	$p = urldecode($post);
+	if(preg_match("/[a-zA-Z-]+(\.[a-zA-Z-]+)+/ims", $p))
+		return 1;
+	else 
+		return 0;
+}
 ?>

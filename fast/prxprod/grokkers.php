@@ -200,6 +200,7 @@ function setCookieMonster($cookie, $fullcookie=0){
 	$cookie=$cookie."\n";
 	
 	if(preg_match("/(expires=(.*?))[;\\n]/im", $cookie, $matches)){
+        date_default_timezone_set("UTC") ;
 		$expire=strtotime($matches[2]);
 		$cookie=str_replace($matches[0], "", $cookie);
 	}
