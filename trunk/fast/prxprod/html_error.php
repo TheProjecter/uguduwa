@@ -46,10 +46,19 @@ function xsubmitx(){
 <tr><td>
 </td></tr>
 <tr><td>
+<?php if ($_GET['e']==3){ ?>
+	<table><tr><td><h2>Oops! This operation is blocked</h2></td></tr></table>
+	<b>Because this is a free proxy some protocols, urls, ports, methods and host may be blocked for your safety and ours.</b><br/><br/>
+	Please bear in mind that this is a web-page based proxy and therefore we need to have strict measure to prevent abuse.
+	If you could leave a comment via the link below, it will be greatly appreciated. 
+<?php }else{ ?>
+
 	<table><tr><td><h2>Oops! It looks like we hit an error</h2></td></tr></table>
 	<b>Either this proxy has encountered an internal error or there is a problem with the site you are trying to access.</b><br/><br/>
 	Please bear in mind that this is a web-page based proxy and therefore has some limitations.
 	If you could leave a comment via the link below, it will be greatly appreciated.
+
+<?php } ?>
 </td></tr>
 <tr><td>
 	<table><tr><td>
