@@ -21,23 +21,23 @@
 /*
  * Set options including all the headers
  */
-function setdefaultoptions(&$ch, server, $sub_req_url){
+function setdefaultoptions(&$ch, $server, $sub_req_url){
 	$myheaderstogo = array();
 
-	if(isset(server['HTTP_COOKIE']))
-		curl_setopt($ch, CURLOPT_COOKIE, server['HTTP_COOKIE']);
-	if(isset(server['HTTP_ACCEPT_CHARSET']))
-		array_push($myheaderstogo,"Accept-Charset: ".server['HTTP_ACCEPT_CHARSET']);
-	if(isset(server['HTTP_ACCEPT_LANGUAGE']))
-		array_push($myheaderstogo, "Accept-Language: ".server['HTTP_ACCEPT_LANGUAGE']);
-	if(isset(server['HTTP_CONNECTION']))
-		array_push($myheaderstogo, "Connection: ".server['HTTP_CONNECTION']);
-	if(isset(server['HTTP_KEEP_ALIVE']))
-		array_push($myheaderstogo, "Keep-Alive: ".server['HTTP_KEEP_ALIVE']);	
-	if(isset(server['HTTP_USER_AGENT']))
-		curl_setopt($ch, CURLOPT_USERAGENT, server['HTTP_USER_AGENT']);
-	if(isset(server['HTTP_ACCEPT']))	
-		array_push($myheaderstogo, "Accept: ".server['HTTP_ACCEPT']);	
+	if(isset($server['HTTP_COOKIE']))
+		curl_setopt($ch, CURLOPT_COOKIE, $server['HTTP_COOKIE']);
+	if(isset($server['HTTP_ACCEPT_CHARSET']))
+		array_push($myheaderstogo,"Accept-Charset: ".$server['HTTP_ACCEPT_CHARSET']);
+	if(isset($server['HTTP_ACCEPT_LANGUAGE']))
+		array_push($myheaderstogo, "Accept-Language: ".$server['HTTP_ACCEPT_LANGUAGE']);
+	if(isset($server['HTTP_CONNECTION']))
+		array_push($myheaderstogo, "Connection: ".$server['HTTP_CONNECTION']);
+	if(isset($server['HTTP_KEEP_ALIVE']))
+		array_push($myheaderstogo, "Keep-Alive: ".$server['HTTP_KEEP_ALIVE']);	
+	if(isset($server['HTTP_USER_AGENT']))
+		curl_setopt($ch, CURLOPT_USERAGENT, $server['HTTP_USER_AGENT']);
+	if(isset($server['HTTP_ACCEPT']))	
+		array_push($myheaderstogo, "Accept: ".$server['HTTP_ACCEPT']);	
 	if(count($myheaderstogo)>0)
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $myheaderstogo);
 
