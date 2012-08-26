@@ -49,7 +49,7 @@ function xsubmitx(){
 <?php if ($_GET['e']==3){ ?>
 	<table><tr><td><h2>Oops! This operation is blocked</h2></td></tr></table>
 	<b>Because this is a free proxy some protocols, urls, ports, methods and host may be blocked for your safety and ours.</b><br/><br/>
-	Please bear in mind that this is a web-page based proxy and therefore we need to have strict measure to prevent abuse.
+	Please bear in mind that this is a web-page based proxy and therefore we need to have strict measures to prevent abuse.
 	If you could leave a comment via the link below, it will be greatly appreciated. 
 <?php }else{ ?>
 

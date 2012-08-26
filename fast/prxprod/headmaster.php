@@ -63,13 +63,13 @@ function addHeadMaster($output, $sub_req_url, &$rating){
 		else
 			$bgcolor="";
 		
-		$divheight	= 120;
+		$divheight= 120;
 		$external=1;
 
 		$randomn= rand(1,10);
 		
 		if($randomn > $percentintadds && !preg_match("/page[GMRUx]([GM])*\d\.html/ims",$addurl) )
-			$adpage= $addurl;
+			$adpage= getMyAdd($rating);
 		else
 			$adpage=getMyExternalAdd($rating).($bgcolor==""?"":"?col=$addbgcolor");
 	}

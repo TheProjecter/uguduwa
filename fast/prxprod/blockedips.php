@@ -23,13 +23,15 @@
  * These sites will be blocked!!! Eff U Google
  */			
 $blockedurls =array(
-	"doubleclick.net",
-	"googlesyndication.com",
-	"yieldmanager.com",
-	"ypn-js.overture.com",
-	"reachjunction.com",
-	"quantserve.com",
-	"reduxmedia.com",
-	"adbrite.com"
+	"doubleclick.net" 		=> 0,
+	"googlesyndication.com" => 0,
+	"yieldmanager.com" => 0,
+	"ypn-js.overture.com" => 0,
+	"reachjunction.com" => 0,
+	"quantserve.com" => 0,
+	"reduxmedia.com" => 0,
+	"adbrite.com" => 0,
+	
+	"facebook.com" => 1
 	);			
 ?>

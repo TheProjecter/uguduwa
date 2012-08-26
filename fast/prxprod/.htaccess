@@ -1,4 +1,4 @@
 Options -Multiviews
 RewriteEngine On
 
-RewriteRule ^proxy(?!\.php)(.*) proxy.php$1
+RewriteRule ^go(.*) proxy.php$1

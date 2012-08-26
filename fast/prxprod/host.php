@@ -23,15 +23,15 @@ $myhost				= "http://127.0.0.1/fast";
 $mysecurityhtml		= "$myhost/prxprod";
 
 $myerrorpage		= "$myhost/prxprod/html_error.php";
-$myoriginalproxy	= "$myhost/prxprod/proxy";
+$myoriginalproxy	= "$myhost/prxprod/go";
 
 
 /*
  * The offload proxies
  */
-$_facebook		= "$myhost/facebookprod/proxy";
-$_google		= "$myhost/googleprod/proxy";
-$_bypassproxy	= "$myhost/bypassprod/proxy";
+$_facebook		= "$myhost/facebookprod/go";
+$_google		= "$myhost/googleprod/go";
+$_bypassproxy	= "$myhost/bypassprod/go";
 
 
 /*
@@ -51,7 +51,7 @@ $loglevel=0;
  * If true then bypass content filtering - faster response
  * Default add will be 'unclassified'
  */
-define('STREAMLINE', false);
+define('STREAMLINE', true);
 
 
 /*

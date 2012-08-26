@@ -31,10 +31,9 @@ $externaladdpageM 	= "$addprefix/ads/pagexM1.html";
 
 
 /*
- * Percentage of external adds to show
- * 0 = show only external adds, 10 = show only our ads.
+ * Percentage of our adds to show 
  */
-$percentintadds = 5;
+$percentintadds = 0;
 
 
 /*
