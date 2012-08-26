@@ -24,5 +24,5 @@
 
 include "guard.php";
 setrawcookie($security_cookie, "", time()-360000, "/");
-header("Location: http://codediaries.com");
+header("Location: http://www.google.com");
 ?>

@@ -43,7 +43,7 @@ error_reporting(0);
 include 'coders.php';
 include 'guard.php';
 include 'grokkers.php';
-//include 'regxs.php';
+include 'regxs.php';
 include 'headmaster.php';
 include 'adds.php';
 include 'postrequest.php';
@@ -143,16 +143,40 @@ else{
 
 }
 
+/*
+ * Reject any port other than 80 below 1024, Reject internal IPs and 
+ * anything with register in it.
+ */
+if(preg_match("/^(http:\/\/)?[^\/]+(:(\d+))/", $sub_req_url, $matches)){
+	if(($portno=intval($matches[3]))!=80 && $portno<1024){
+		error_log("Trying to connect to port other than 80 $portno - $sub_req_url");
+		header(makeAllHTTPS("Location: $myerrorpage?e=3"));
+		exit(0);
+	}
+}
+if(preg_match("/^(http:\/\/)?(192|172|10)\.\d+\.\d+\.\d+(:\d+)?$/ims", $sub_req_url)){
+	header(makeAllHTTPS("Location: $myerrorpage?e=3"));
+	exit(0);
+}
+if( strstr($sub_req_url, "register") ||  strstr($sub_req_url, "registration")){
+	header(makeAllHTTPS("Location: $myerrorpage?e=3"));
+	exit(0);
+}
+
 
 /*
  * Stop it immediately if it's in the blockedurl list.
  */
-foreach($blockedurls as $stopurl){
-	if(stripos($sub_req_url, $stopurl)!==FALSE){
-		exit(0);
+$inthegarden=0;
+foreach($blockedurls as $gardenpatch => $w_go){
+	if(stripos($sub_req_url, $gardenpatch)!==FALSE){
+		if($w_go)
+			$inthegarden=1;
+		else{
+			exit(0);
+		}
 	}
 }
-
 
 /*
  * Initialize curl !!!!!!!
@@ -174,7 +198,10 @@ if(myspecialcurloptionsI($ch, $sub_req_url)){
 if(strstr($_SERVER['REQUEST_METHOD'], "POST")){
 
 	$encoded = getencodedpost($_POST);
-	
+	if(!$inthegarden && checkpostforspam($encoded)){
+		header(makeAllHTTPS("Location: $myerrorpage?e=3"));
+		exit(0);
+	}
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS,  $encoded);
 }
@@ -182,6 +209,7 @@ if(strstr($_SERVER['REQUEST_METHOD'], "POST")){
 /*
  * EXECUTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  */
+error_log("Execute - $sub_req_url");
 if(($x=curl_exec($ch))===FALSE){
 	header(makeAllHTTPS("Location: $myerrorpage?e=3&ce=".curl_errno($ch)));
 	curl_close($ch);

@@ -31,7 +31,7 @@ include "grokkers.php";
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="index.css" />
-<script type="text/javascript" src="js_encrypter.php" ></script>
+<script type="text/javascript" src="encrypter_js.php" ></script>
 </head>
 <body>
 &nbsp;
@@ -44,7 +44,7 @@ if(isset($_GET[URLNAMEENC])){
 ?>
 	It looks like you have come here through a link somebody sent you.
 	<p>&nbsp;</p>
-	<a href="http://codediaries.com">Get me out of here</a>
+	<a href="http://www.google.com">Get me out of here</a>
 <?php 	
 }
 else if(isset($_GET[URLNAMEJSENC])){
@@ -82,6 +82,7 @@ You are about to surf to <b><?php echo $_GET[URLNAMEPLAIN]; ?></b> via the Code 
 	<font size="0.5em">I agree to the <a href="javascript:void(0)" onclick="window.open('terms_and_conditions.html','Terms_and_Conditions','scrollbars=yes,menubar=no,width=600,height=400,toolbar=no')">terms and conditions</a> of this proxy.</font>
 			
 	<p>&nbsp;</p>
+
 			
 <?php	
 }
@@ -90,7 +91,7 @@ else{
 
 Looks like there is an error.
 <p>&nbsp;</p>
-<a href="http://codediaries.com">Get me out of here</a>
+<a href="http://www.google.com">Get me out of here</a>
 
 <?php 
 }
